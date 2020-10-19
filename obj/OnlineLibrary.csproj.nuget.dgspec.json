@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\nanda\\source\\repos\\OnlineLibrary\\OnlineLibrary.csproj": {}
+    "C:\\Users\\nanda\\source\\repos\\OnlineLibraryDataBase\\OnlineLibrary.csproj": {}
   },
   "projects": {
-    "C:\\Users\\nanda\\source\\repos\\OnlineLibrary\\OnlineLibrary.csproj": {
+    "C:\\Users\\nanda\\source\\repos\\OnlineLibraryDataBase\\OnlineLibrary.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nanda\\source\\repos\\OnlineLibrary\\OnlineLibrary.csproj",
+        "projectUniqueName": "C:\\Users\\nanda\\source\\repos\\OnlineLibraryDataBase\\OnlineLibrary.csproj",
         "projectName": "OnlineLibrary",
-        "projectPath": "C:\\Users\\nanda\\source\\repos\\OnlineLibrary\\OnlineLibrary.csproj",
+        "projectPath": "C:\\Users\\nanda\\source\\repos\\OnlineLibraryDataBase\\OnlineLibrary.csproj",
         "packagesPath": "C:\\Users\\nanda\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nanda\\source\\repos\\OnlineLibrary\\obj\\",
+        "outputPath": "C:\\Users\\nanda\\source\\repos\\OnlineLibraryDataBase\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\nanda\\AppData\\Roaming\\NuGet\\NuGet.Config",
