@@ -19,5 +19,30 @@ namespace OnlineLibrary.Data
             return await _dbContext.Book.ToListAsync(); 
 
         }
+        public async Task<Book>GetBookAsync(int bookId)
+        {
+            return await _dbContext.Book.FirstOrDefaultAsync(book => book.BookID == bookId);
+
+        }
+        public async Task<bool> RemoveBookAsync(int bookId)
+        {
+            var book = await _dbContext.Book.FirstOrDefaultAsync(book => book.BookID == bookId);
+            _dbContext.Book.Remove(book);
+            await _dbContext.SaveChangesAsync();
+            return true;
+
+        }
+        public async Task<bool> UpdateBookAsync(Book book)
+        {
+             _dbContext.Book.Update(book);
+            await _dbContext.SaveChangesAsync();
+            return true;
+        }
+        public async Task<bool> AddBookAsync(Book book)
+        {
+            await _dbContext.Book.AddAsync(book);
+            await _dbContext.SaveChangesAsync();
+            return true;
+        }
     }
 }
