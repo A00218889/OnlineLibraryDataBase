@@ -30,7 +30,6 @@ namespace OnlineLibrary.Data
             _dbContext.Book.Remove(book);
             await _dbContext.SaveChangesAsync();
             return true;
-
         }
         public async Task<bool> UpdateBookAsync(Book book)
         {
