@@ -1,35 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Collections.Generic;
 
 namespace OnlineLibrary.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
-        internal object OnlineAccess;
-
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
+
         public DbSet<Book> Book { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Book>().HasData(GetBooks());
+            modelBuilder.Entity<Book>().HasData(GetBook());
             base.OnModelCreating(modelBuilder);
         }
 
-        private Book[] GetBooks()
+        private static IEnumerable<Book> GetBook()
         {
-            throw new NotImplementedException();
+            return new List<Book>();
         }
-
-        private static IEnumerable<OnlineAccess> GetOnlineAccess()
-        {
-            return new List<OnlineAccess>();    
-        }
-
     }
 }

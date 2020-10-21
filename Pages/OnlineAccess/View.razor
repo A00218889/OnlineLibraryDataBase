@@ -1,81 +1,72 @@
-﻿@page "/Students/View/{StudentId:int}"
-@inject Data.LearningServices LearningServices
+﻿@*
+    @page "/OnlineAccess/View/{AccessId:int}"
+    @inject Data.OnlineServices OnlineServices
 
-<h3>View Book</h3>
+    <h3>View OnlineAccess</h3>
 
-<div>
-    <hr />
-    @if (_book == null)
-    {
-        <p>
-            <em>Loading...</em>
-        </p>
+    <div>
+        <hr />
+        @if (_onlineAccess == null)
+        {
+            <p>
+                <em>Loading...</em>
+            </p>
+        }
+        else if (_onlineAccess.AccessId == 0)
+        {
+            <p>No Records Found.</p>
+        }
+        else
+        {
+            <dl class="row">
+
+                <dt class="col-sm-2">
+                    AccessId
+                </dt>
+                <dd class="col-sm-10">
+                    @_onlineAccess.AccessId
+                </dd>
+
+                <dt class="col-sm-2">
+                Customer Id
+                </dt>
+                <dd class="col-sm-10">
+                    @_onlineAccess.CustomerId
+                </dd>
+
+                <dt class="col-sm-2">
+                    Page Count
+                </dt>
+                <dd class="col-sm-10">
+                    @_onlineAccess.BookId
+                </dd>
+
+
+
+
+            </dl>
+        }
+    </div>
+
+    <div>
+        <a href="/OnlineAccess/Edit/@_onlineAccess.AccessID">Edit</a> | <a href="/Books/">Back to List</a>
+    </div>
+
+    @code {
+
+        [Parameter]
+        public int AccessID { get; set; }
+
+        Data.OnlineAccess _onlineAccess = new Data.OnlineAccess();
+
+        protected override async Task OnInitializedAsync()
+        {
+            await RefreshOnlineAccess(AccessID);
+        }
+
+        private async Task RefreshBook(int accessId)
+        {
+            _onlineAccess = await OnlineServices.GetOnlineAccessAsync(accessId);
+        }
     }
-    else if (_book.BookID == 0)
-    {
-        <p>No Records Found.</p>
-    }
-    else
-    {
-        <dl class="row">
-
-            <dt class="col-sm-2">
-                BookId
-            </dt>
-            <dd class="col-sm-10">
-                @_book.BookID
-            </dd>
-
-            <dt class="col-sm-2">
-                Book Name
-            </dt>
-            <dd class="col-sm-10">
-                @_book.BookName
-            </dd>
-
-            <dt class="col-sm-2">
-                Page Count
-            </dt>
-            <dd class="col-sm-10">
-                @_book.Pagecount
-            </dd>
-
-            <dt class="col-sm-2">
-                Author
-            </dt>
-            <dd class="col-sm-10">
-                @_book.Author
-            </dd>
-
-            <dt class="col-sm-2">
-                Book Genre
-            </dt>
-            <dd class="col-sm-10">
-                @_book.BookGenre
-            </dd>
-
-        </dl>
-    }
-</div>
-
-<div>
-    <a href="/Books/Edit/@_book.BookID">Edit</a> | <a href="/Books/">Back to List</a>
-</div>
-
-@code {
-
-    [Parameter]
-    public int BookID { get; set; }
-
-    Data.Book _book = new Data.Book();
-
-    protected override async Task OnInitializedAsync()
-    {
-        await RefreshBook(BookID);
-    }
-
-    private async Task RefreshBook(int bookId)
-    {
-        _book = await LearningServices.GetBookAsync(bookId);
-    }
-}
+*@

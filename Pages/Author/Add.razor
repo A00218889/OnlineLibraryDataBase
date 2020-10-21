@@ -1,58 +1,59 @@
-﻿@page "/Books/Add/"
-@inject NavigationManager NavigationManager;
-@inject Data.LearningServices LearningServices
+﻿@*
 
-<h3>Add Book</h3>
+    @page "/Author/Add/"
+    @inject NavigationManager NavigationManager;
+    @inject Data.AuthorServices AuthorServices
 
-<div>
-    <hr />
-    <EditForm Model="@_book" OnValidSubmit="@HandleValidSubmit">
+    <h3>Add Book</h3>
 
-        <dl class="row">
+    <div>
+        <hr />
+        <EditForm Model="@_" OnValidSubmit="@HandleValidSubmit">
 
-            
+            <dl class="row">
 
-            <dt class="col-sm-2">
-                Book Name
-            </dt>
-            <dd class="col-sm-10">
-                <InputText id="BookName" @bind-Value="_book.BookName" /> <ValidationMessage For="@(() => _book.BookName)" />
-            </dd>
+                <dt class="col-sm-2">
+                    Book Name
+                </dt>
+                <dd class="col-sm-10">
+                    <InputText id="BookName" @bind-Value="_book.BookName" /> <ValidationMessage For="@(() => _book.BookName)" />
+                </dd>
 
-            <dt class="col-sm-2">
-             Author
-            </dt>
-            <dd class="col-sm-10">
-                <InputText id="Author" @bind-Value="_book.Author" /> <ValidationMessage For="@(() => _book.Author)" />
-            </dd>
+                <dt class="col-sm-2">
+                 Author
+                </dt>
+                <dd class="col-sm-10">
+                    <InputText id="Author" @bind-Value="_book.Author" /> <ValidationMessage For="@(() => _book.Author)" />
+                </dd>
 
-            <dt class="col-sm-2">
-               Book Genre
-            </dt>
-            <dd class="col-sm-10">
-                <InputText id="Number" @bind-Value="_book.BookGenre" /> <ValidationMessage For="@(() => _book.BookGenre)" />
-            </dd>
+                <dt class="col-sm-2">
+                   Book Genre
+                </dt>
+                <dd class="col-sm-10">
+                    <InputText id="Number" @bind-Value="_book.BookGenre" /> <ValidationMessage For="@(() => _book.BookGenre)" />
+                </dd>
 
-        </dl>
+            </dl>
 
-        <button type="submit" class="btn btn-success">Submit</button>
-        <DataAnnotationsValidator />
-        <ValidationSummary />
-    </EditForm>
-</div>
+            <button type="submit" class="btn btn-success">Submit</button>
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+        </EditForm>
+    </div>
 
-<div>
-    <a href="/Books/">Back to List</a>
-</div>
+    <div>
+        <a href="/Books/">Back to List</a>
+    </div>
 
-@code {
-    private Data.Book _book = new Data.Book();
+    @code {
+        private Data.Book _book = new Data.Book();
 
-    private async Task HandleValidSubmit()
-    {
-        await LearningServices.AddBookAsync(_book);
+        private async Task HandleValidSubmit()
+        {
+            await LearningServices.AddBookAsync(_book);
 
-        NavigationManager.NavigateTo("/books");
+            NavigationManager.NavigateTo("/books");
+        }
+
     }
-
-}
+*@
