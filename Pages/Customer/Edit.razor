@@ -1,0 +1,90 @@
+﻿@page "/Books/Edit/{BookId:int}"
+@inject NavigationManager NavigationManager;
+@inject Data.LearningServices LearningServices
+
+<h3>Edit Book</h3>
+
+<div>
+    <hr />
+    @if (_book == null)
+    {
+        <p>
+            <em>Loading...</em>
+        </p>
+    }
+    else if (_book.BookID == 0)
+    {
+        <p>No Records Found.</p>
+    }
+    else
+    {
+        <EditForm Model="@_book" OnValidSubmit="@HandleValidSubmit">
+
+            <dl class="row">
+
+                <dt class="col-sm-2">
+                    Book ID
+                </dt>
+                <dd class="col-sm-10">
+                    @_book.BookID
+                </dd>
+
+                <dt class="col-sm-2">
+                    Book Name
+                </dt>
+                <dd class="col-sm-10">
+                    <InputText id="BookName" @bind-Value="_book.BookName" /> <ValidationMessage For="@(() => _book.BookName)" />
+                </dd>
+
+                <dt class="col-sm-2">
+                    Author
+                </dt>
+                <dd class="col-sm-10">
+                    <InputText id="Author" @bind-Value="_book.Author" /> <ValidationMessage For="@(() => _book.Author)" />
+                </dd>
+
+                <dt class="col-sm-2">
+                    BookGenre
+                </dt>
+                <dd class="col-sm-10">
+                    <InputText id="BookGenre" @bind-Value="_book.BookGenre" /> <ValidationMessage For="@(() => _book.BookGenre)" />
+                </dd>
+
+            </dl>
+
+            <button type="submit" class="btn btn-success">Submit</button>
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+        </EditForm>
+    }
+</div>
+
+<div>
+    <a href="/Books/View/@_book.BookID">View</a> |
+    <a href="/Books/">Back to List</a>
+</div>
+
+@code {
+
+    [Parameter]
+    public int BookId { get; set; }
+
+    private Data.Book _book = new Data.Book();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await RefreshBook(BookId);
+    }
+
+    private async Task RefreshBook(int bookId)
+    {
+        _book = await LearningServices.GetBookAsync(bookId);
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        await LearningServices.UpdateBookAsync(_book);
+        NavigationManager.NavigateTo($"/Books/View/{BookId}");
+    }
+
+}

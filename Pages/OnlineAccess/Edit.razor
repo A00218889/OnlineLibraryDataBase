@@ -1,0 +1,90 @@
+﻿@page "/OnlineAccess/Edit/{AccessId:int}"
+@inject NavigationManager NavigationManager;
+@inject Data.OnlineServices OnlineServices
+
+<h3>Edit OnlineAccess</h3>
+
+<div>
+    <hr />
+    @if (_onlineAccess == null)
+    {
+        <p>
+            <em>Loading...</em>
+        </p>
+    }
+    else if (_onlineAccess.BookID == 0)
+    {
+        <p>No Records Found.</p>
+    }
+    else
+    {
+        <EditForm Model="@_onlineAccess" OnValidSubmit="@HandleValidSubmit">
+
+            <dl class="row">
+
+                <dt class="col-sm-2">
+                    Book ID
+                </dt>
+                <dd class="col-sm-10">
+                    @_onlineAccess.BookID
+                </dd>
+
+                <dt class="col-sm-2">
+                    Book Name
+                </dt>
+                <dd class="col-sm-10">
+                    <InputText id="BookName" @bind-Value="_onlineAccess.BookName" /> <ValidationMessage For="@(() => _onlineAccess.BookName)" />
+                </dd>
+
+                <dt class="col-sm-2">
+                    Author
+                </dt>
+                <dd class="col-sm-10">
+                    <InputText id="Author" @bind-Value="_onlineAccess.Author" /> <ValidationMessage For="@(() => _onlineAccess.Author)" />
+                </dd>
+
+                <dt class="col-sm-2">
+                    BookGenre
+                </dt>
+                <dd class="col-sm-10">
+                    <InputText id="BookGenre" @bind-Value="_onlineAccess.BookGenre" /> <ValidationMessage For="@(() => _onlineAccess.BookGenre)" />
+                </dd>
+
+            </dl>
+
+            <button type="submit" class="btn btn-success">Submit</button>
+            <DataAnnotationsValidator />
+            <ValidationSummary />
+        </EditForm>
+    }
+</div>
+
+<div>
+    <a href="/OnlineAccess/View/@_onlineAccess.BookId">View</a> |
+    <a href="/OnlineAccess/">Back to List</a>
+</div>
+
+@code {
+
+    [Parameter]
+    public int AccessId { get; set; }
+
+    private Data.OnlineAccess _onlineAccess = new Data.OnlineAccess();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await RefreshOnlineAccess(AccessId);
+    }
+
+    private async Task RefreshOnlineAccess(int bookId)
+    {
+        _onlineAccess = await OnlineServices.GetOnlineAccessAsync(accessId);
+    }
+
+    private async Task HandleValidSubmit()
+    {
+        await OnlineServices.UpdateBookAsync(_onlineAccess);
+        NavigationManager.NavigateTo($"/OnlineAccess/View/{AccessId}");
+    }
+
+}

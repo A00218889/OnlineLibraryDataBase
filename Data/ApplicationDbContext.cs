@@ -8,6 +8,8 @@ namespace OnlineLibrary.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
+        internal object OnlineAccess;
+
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
@@ -17,10 +19,16 @@ namespace OnlineLibrary.Data
         {
             modelBuilder.Entity<Book>().HasData(GetBooks());
             base.OnModelCreating(modelBuilder);
-        }           
-        private static IEnumerable<Book>GetBooks()
+        }
+
+        private Book[] GetBooks()
         {
-            return new List<Book>();    
+            throw new NotImplementedException();
+        }
+
+        private static IEnumerable<OnlineAccess> GetOnlineAccess()
+        {
+            return new List<OnlineAccess>();    
         }
 
     }

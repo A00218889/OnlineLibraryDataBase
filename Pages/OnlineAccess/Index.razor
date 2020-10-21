@@ -1,0 +1,82 @@
+﻿@page "/books"
+@inject NavigationManager NavigationManager;
+@inject Data.LearningServices LearningServices;
+@inject IJSRuntime JsRuntime;
+
+<h3>OnlineAccess</h3>
+
+<small>Need all Access details.</small>
+<div class="form-group">
+    <a href="/OnlineAccess/Add/" class="btn btn-success"><i class="oi oi-plus"></i> Add OnlineAccess</a>
+</div>
+<br>
+
+@if (_onlineAccess == null)
+{
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else if (_onlineAccess.Count == 0)
+{
+    <p>No Records Found.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>AccessId</th>
+                <th>CustomerId</th>
+                <th>BookId</th>
+                <th>Author</th>
+                 <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var onlineAccess in _onlineAccess)
+            {
+            <tr>
+                <td>
+                    <a href="/OnlineAccess/View/@OnlineAccess.AccessId">@OnlineAccess.AccessId</a>
+                </td>
+                <td>@onlineAccess.CustomerId</td>
+                <td>@onlineAccess.BookId</td>
+                <td>@onlineAccess.Author</td>
+                 <td>
+                    <button class="btn btn-danger"
+                            @onclick="@(e => RemoveOnlineAccess(@onlineAccess.AccessId))">
+                        Remove
+                    </button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    List<Data.Book> _book = new List<Data.Book>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await RefreshBooks();
+    }
+
+    private async Task RefreshBooks()
+    {
+        _book = await LearningServices.GetBooksAsync();
+    }
+
+    private async Task RemoveBook(int bookId)
+    {
+        var confirmation = await JsRuntime.InvokeAsync<bool>("confirm", "Are you sure you want to remove this book?");
+
+        if (confirmation)
+        {
+            await LearningServices.RemoveBookAsync(bookId);
+            await RefreshBooks();
+        }
+    }
+
+}

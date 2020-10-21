@@ -1,0 +1,60 @@
+﻿@page "/OnlineAccess/Add/"
+@inject NavigationManager NavigationManager;
+@inject Data.OnlineServices OnlineServices
+
+<h3>Add OnlineAccess</h3>
+
+<div>
+    <hr />
+    <EditForm Model="@_onlineAccess" OnValidSubmit="@HandleValidSubmit">
+
+        <dl class="row">
+
+
+
+            <dt class="col-sm-2">
+                Access Id
+            </dt>
+            <dd class="col-sm-10">
+                <InputText id="AccessId" @bind-Value="_onlineAccess.AccessID" /> <ValidationMessage For="@(() => _onlineAccess.AccessID)" />
+            </dd>
+
+            <dt class="col-sm-2">
+                Customer Id
+            </dt>
+            <dd class="col-sm-10">
+                <InputText id="CustomerId" @bind-Value="_onlineAccess.CustomerId" /> <ValidationMessage For="@(() => _onlineAccess.CustomerId)" />
+            </dd>
+
+            <dt class="col-sm-2">
+                Book Id
+            </dt>
+            <dd class="col-sm-10">
+                <InputText id="BookId" @bind-Value="_onlineAccess.BookId" /> <ValidationMessage For="@(() => _onlineAccess.BookId)" />
+            </dd>
+
+        </dl>
+
+        <button type="submit" class="btn btn-success">Submit</button>
+        <DataAnnotationsValidator />
+        <ValidationSummary />
+    </EditForm>
+</div>
+
+<div>
+    <a href="/OnlineAccess/">Back to List</a>
+</div>
+
+@code {
+    private Data.OnlineAccess _onlineAccess = new Data.OnlineAccess();
+
+    private async Task HandleValidSubmit()
+    {
+        await OnlineServices.AddOnlineAccessAsync(_onlineAccess);
+
+        NavigationManager.NavigateTo("/onlineAccess");
+    }
+
+}
+
+ 
