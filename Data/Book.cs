@@ -14,7 +14,7 @@ namespace OnlineLibrary.Data
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 
         [Required(ErrorMessage = "Book Id is required.")]
-        public int BookID { get; set; }
+        public int BookId { get; set; }
 
         [Required(ErrorMessage = "Book Name is required.")]
         public string BookName { get; set; }

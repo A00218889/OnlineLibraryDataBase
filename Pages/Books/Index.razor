@@ -26,7 +26,7 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>BookID</th>
+                <th>BookId</th>
                 <th>BookName</th>
                 <th>Pagecount</th>
                 <th>Author</th>
@@ -39,7 +39,7 @@ else
             {
             <tr>
                 <td>
-                    <a href="/Books/View/@book.BookID">@book.BookID</a>
+                    <a href="/Books/View/@book.BookId">@book.BookId</a>
                 </td>
                 <td>@book.BookName</td>
                 <td>@book.Pagecount</td>
@@ -47,7 +47,7 @@ else
                 <td>@book.BookGenre</td>
                 <td>
                     <button class="btn btn-danger"
-                            @onclick="@(e => RemoveBook(@book.BookID))">
+                            @onclick="@(e => RemoveBook(@book.BookId))">
                         Remove
                     </button>
                 </td>

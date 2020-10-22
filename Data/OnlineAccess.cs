@@ -15,7 +15,7 @@ namespace OnlineLibrary.Data
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
 
         [Required(ErrorMessage = "OnlineAccess Id is required.")]
-        public string AccessID { get; set; }
+        public string OnlineAccessId { get; set; }
 
         [Required(ErrorMessage = "Customer Id is required.")]
         public string CustomerId { get; set; }
