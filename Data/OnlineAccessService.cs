@@ -13,7 +13,7 @@ namespace OnlineLibrary.Data
             _dbContext = dbContext;
         }
 
-        public async Task<List<OnlineAccess>> GetOnlineAccesssAsync()
+        public async Task<List<OnlineAccess>> GetOnlineAccesssesAsync()
         {
             return await _dbContext.OnlineAccess.ToListAsync();
         }

@@ -47,6 +47,38 @@ namespace OnlineLibrary.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Books",
+                columns: table => new
+                {
+                    BookId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    BookName = table.Column<string>(nullable: false),
+                    Pagecount = table.Column<int>(nullable: false),
+                    Author = table.Column<string>(nullable: false),
+                    BookGenre = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Books", x => x.BookId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "OnlineAccess",
+                columns: table => new
+                {
+                    OnlineAccessId = table.Column<int>(nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    CustomerId = table.Column<int>(nullable: false),
+                    BookId = table.Column<int>(nullable: false),
+                    ValidFrom = table.Column<DateTime>(nullable: false),
+                    ValidTo = table.Column<DateTime>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_OnlineAccess", x => x.OnlineAccessId);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -206,6 +238,12 @@ namespace OnlineLibrary.Data.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Books");
+
+            migrationBuilder.DropTable(
+                name: "OnlineAccess");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

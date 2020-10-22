@@ -6,6 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\Author\**" />
+    <Compile Remove="Pages\Customer\**" />
+    <Content Remove="Pages\Author\**" />
+    <Content Remove="Pages\Customer\**" />
+    <EmbeddedResource Remove="Pages\Author\**" />
+    <EmbeddedResource Remove="Pages\Customer\**" />
+    <None Remove="Pages\Author\**" />
+    <None Remove="Pages\Customer\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="Pages\FetchData.razor" />
   </ItemGroup>
 
@@ -19,6 +30,13 @@
 
   <ItemGroup>
     <Folder Include="Data\Migrations\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Pages\OnlineAccess\Add.razor" />
+    <None Include="Pages\OnlineAccess\Edit.razor" />
+    <None Include="Pages\OnlineAccess\Index.razor" />
+    <None Include="Pages\OnlineAccess\View.razor" />
   </ItemGroup>
 
 </Project>

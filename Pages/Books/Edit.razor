@@ -1,6 +1,6 @@
 ﻿@page "/Books/Edit/{BookId:int}"
 @inject NavigationManager NavigationManager;
-@inject Data.LearningServices LearningServices
+@inject Data.BookService BookService
 
 <h3>Edit Book</h3>
 
@@ -37,6 +37,13 @@
                 </dd>
 
                 <dt class="col-sm-2">
+                    Page Count
+                </dt>
+                <dd class="col-sm-10">
+                    <InputNumber id="PageCount" @bind-Value="_book.Pagecount" /> <ValidationMessage For="@(() => _book.Pagecount)" />
+                </dd>
+
+                <dt class="col-sm-2">
                     Author
                 </dt>
                 <dd class="col-sm-10">
@@ -44,7 +51,7 @@
                 </dd>
 
                 <dt class="col-sm-2">
-                    BookGenre
+                    Book Genre
                 </dt>
                 <dd class="col-sm-10">
                     <InputText id="BookGenre" @bind-Value="_book.BookGenre" /> <ValidationMessage For="@(() => _book.BookGenre)" />
@@ -78,12 +85,12 @@
 
     private async Task RefreshBook(int bookId)
     {
-        _book = await LearningServices.GetBookAsync(bookId);
+        _book = await BookService.GetBookAsync(bookId);
     }
 
     private async Task HandleValidSubmit()
     {
-        await LearningServices.UpdateBookAsync(_book);
+        await BookService.UpdateBookAsync(_book);
         NavigationManager.NavigateTo($"/Books/View/{BookId}");
     }
 

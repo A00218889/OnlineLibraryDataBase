@@ -1,6 +1,6 @@
 ﻿
-    @page "/OnlineAccess/View/{AccessId:int}"
-    @inject Data.OnlineServices OnlineServices
+    @page "/OnlineAccess/View/{OnlineAccessId:int}"
+    @inject Data.OnlineAccessService OnlineAccessService
 
     <h3>View OnlineAccess</h3>
 
@@ -12,7 +12,7 @@
                 <em>Loading...</em>
             </p>
         }
-        else if (_onlineAccess.AccessId == 0)
+        else if (_onlineAccess.OnlineAccessId == 0)
         {
             <p>No Records Found.</p>
         }
@@ -21,10 +21,10 @@
             <dl class="row">
 
                 <dt class="col-sm-2">
-                    AccessId
+                    Online Access Id
                 </dt>
                 <dd class="col-sm-10">
-                    @_onlineAccess.AccessId
+                    @_onlineAccess.OnlineAccessId
                 </dd>
 
                 <dt class="col-sm-2">
@@ -35,10 +35,24 @@
                 </dd>
 
                 <dt class="col-sm-2">
-                    Page Count
+                    Book Id
                 </dt>
                 <dd class="col-sm-10">
                     @_onlineAccess.BookId
+                </dd>
+                
+                <dt class="col-sm-2">
+                    Valid From
+                </dt>
+                <dd class="col-sm-10">
+                    @_onlineAccess.ValidFrom
+                </dd>
+                
+                <dt class="col-sm-2">
+                    Valid To
+                </dt>
+                <dd class="col-sm-10">
+                    @_onlineAccess.ValidTo
                 </dd>
 
 
@@ -49,24 +63,24 @@
     </div>
 
     <div>
-        <a href="/OnlineAccess/Edit/@_onlineAccess.AccessID">Edit</a> | <a href="/Books/">Back to List</a>
+        <a href="/OnlineAccess/Edit/@_onlineAccess.OnlineAccessId">Edit</a> | <a href="/Books/">Back to List</a>
     </div>
 
     @code {
 
         [Parameter]
-        public int AccessID { get; set; }
+        public int OnlineAccessId { get; set; }
 
         Data.OnlineAccess _onlineAccess = new Data.OnlineAccess();
 
         protected override async Task OnInitializedAsync()
         {
-            await RefreshOnlineAccess(AccessID);
+            await RefreshOnlineAccess(OnlineAccessId);
         }
 
-        private async Task RefreshBook(int accessId)
+        private async Task RefreshOnlineAccess(int accessId)
         {
-            _onlineAccess = await OnlineServices.GetOnlineAccessAsync(accessId);
+            _onlineAccess = await OnlineAccessService.GetOnlineAccessAsync(OnlineAccessId);
         }
     }
 

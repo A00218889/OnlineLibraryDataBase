@@ -1,6 +1,6 @@
-﻿@page "/OnlineAccess/Edit/{AccessId:int}"
+﻿@page "/OnlineAccess/Edit/{OnlineAccessId:int}"
     @inject NavigationManager NavigationManager;
-    @inject Data.OnlineServices OnlineServices
+    @inject Data.OnlineAccessService OnlineAccessService
 
     <h3>Edit OnlineAccess</h3>
 
@@ -12,7 +12,7 @@
                 <em>Loading...</em>
             </p>
         }
-        else if (_onlineAccess.AccessId == 0)
+        else if (_onlineAccess.OnlineAccessId == 0)
         {
             <p>No Records Found.</p>
         }
@@ -23,20 +23,39 @@
                 <dl class="row">
 
                     <dt class="col-sm-2">
-                        Access ID
+                        Online Access ID
                     </dt>
                     <dd class="col-sm-10">
-                        @_onlineAccess.AccessId
+                        @_onlineAccess.OnlineAccessId
                     </dd>
 
                     <dt class="col-sm-2">
                         Customer Id
                     </dt>
                     <dd class="col-sm-10">
-                        <InputText id="Customer Id" @bind-Value="_onlineAccess.CustomerId" /> <ValidationMessage For="@(() => _onlineAccess.CustomerId)" />
+                        <InputNumber id="CustomerId" @bind-Value="_onlineAccess.CustomerId" /> <ValidationMessage For="@(() => _onlineAccess.CustomerId)" />
                     </dd>
 
+                    <dt class="col-sm-2">
+                        Book Id
+                    </dt>
+                    <dd class="col-sm-10">
+                        <InputNumber id="BookId" @bind-Value="_onlineAccess.BookId" /> <ValidationMessage For="@(() => _onlineAccess.BookId)" />
+                    </dd>
 
+                    <dt class="col-sm-2">
+                        Valid From
+                    </dt>
+                    <dd class="col-sm-10">
+                        <InputDate id="ValidFrom" type="date" @bind-Value="_onlineAccess.ValidFrom" /> <ValidationMessage For="@(() => _onlineAccess.ValidFrom)" />
+                    </dd>
+
+                    <dt class="col-sm-2">
+                        Valid To
+                    </dt>
+                    <dd class="col-sm-10">
+                        <InputDate id="ValidTo" type="date" @bind-Value="_onlineAccess.ValidTo" /> <ValidationMessage For="@(() => _onlineAccess.ValidTo)" />
+                    </dd>
 
                 </dl>
 
@@ -55,24 +74,24 @@
     @code {
 
         [Parameter]
-        public int AccessId { get; set; }
+        public int OnlineAccessId { get; set; }
 
         private Data.OnlineAccess _onlineAccess = new Data.OnlineAccess();
 
         protected override async Task OnInitializedAsync()
         {
-            await RefreshOnlineAccess(AccessId);
+            await RefreshOnlineAccess(OnlineAccessId);
         }
 
         private async Task RefreshOnlineAccess(int bookId)
         {
-            _onlineAccess = await OnlineServices.GetOnlineAccessAsync(AccessId);
+            _onlineAccess = await OnlineAccessService.GetOnlineAccessAsync(OnlineAccessId);
         }
 
         private async Task HandleValidSubmit()
         {
-            await OnlineServices.UpdateOnlineAccessAsync(_onlineAccess);
-            NavigationManager.NavigateTo($"/OnlineAccess/View/{AccessId}");
+            await OnlineAccessService.UpdateOnlineAccessAsync(_onlineAccess);
+            NavigationManager.NavigateTo($"/OnlineAccess/View/{OnlineAccessId}");
         }
 
     }

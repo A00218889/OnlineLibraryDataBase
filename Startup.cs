@@ -40,7 +40,7 @@ namespace OnlineLibrary
             services.AddServerSideBlazor();
             services.AddScoped<AuthenticationStateProvider, RevalidatingIdentityAuthenticationStateProvider<IdentityUser>>();
             services.AddScoped<BookService>();   // It is required to be able to work with Books table
-            
+            services.AddScoped<OnlineAccessService>();
 
         }
 

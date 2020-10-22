@@ -1,6 +1,6 @@
 ﻿@page "/Books/Add/"
 @inject NavigationManager NavigationManager;
-@inject Data.LearningServices LearningServices
+@inject Data.BookService BookService
 
 <h3>Add Book</h3>
 
@@ -9,14 +9,18 @@
     <EditForm Model="@_book" OnValidSubmit="@HandleValidSubmit">
 
         <dl class="row">
-
-            
-
             <dt class="col-sm-2">
                 Book Name
             </dt>
             <dd class="col-sm-10">
                 <InputText id="BookName" @bind-Value="_book.BookName" /> <ValidationMessage For="@(() => _book.BookName)" />
+            </dd>
+            
+            <dt class="col-sm-2">
+                Page Count
+            </dt>
+            <dd class="col-sm-10">
+                <InputNumber id="PageCount" @bind-Value="_book.Pagecount" /> <ValidationMessage For="@(() => _book.Pagecount)" />
             </dd>
 
             <dt class="col-sm-2">
@@ -50,7 +54,7 @@
 
     private async Task HandleValidSubmit()
     {
-        await LearningServices.AddBookAsync(_book);
+        await BookService.AddBookAsync(_book);
 
         NavigationManager.NavigateTo("/books");
     }

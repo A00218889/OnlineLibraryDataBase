@@ -9,8 +9,8 @@ using OnlineLibrary.Data;
 namespace OnlineLibrary.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201012203758_Books")]
-    partial class Books
+    [Migration("20201022024243_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -216,25 +216,51 @@ namespace OnlineLibrary.Data.Migrations
 
             modelBuilder.Entity("OnlineLibrary.Data.Book", b =>
                 {
-                    b.Property<int>("BookID")
+                    b.Property<int>("BookId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Author")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("BookGenre")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("BookName")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<int>("Pagecount")
                         .HasColumnType("INTEGER");
 
-                    b.HasKey("BookID");
+                    b.HasKey("BookId");
 
                     b.ToTable("Books");
+                });
+
+            modelBuilder.Entity("OnlineLibrary.Data.OnlineAccess", b =>
+                {
+                    b.Property<int>("OnlineAccessId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("BookId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CustomerId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("ValidFrom")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("ValidTo")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("OnlineAccessId");
+
+                    b.ToTable("OnlineAccess");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

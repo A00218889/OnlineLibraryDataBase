@@ -1,5 +1,5 @@
-﻿@page "/Students/View/{StudentId:int}"
-@inject Data.LearningServices LearningServices
+﻿@page "/Books/View/{BookId:int}"
+@inject Data.BookService BookService
 
 <h3>View Book</h3>
 
@@ -65,17 +65,17 @@
 @code {
 
     [Parameter]
-    public int BookID { get; set; }
+    public int BookId { get; set; }
 
     Data.Book _book = new Data.Book();
 
     protected override async Task OnInitializedAsync()
     {
-        await RefreshBook(BookID);
+        await RefreshBook(BookId);
     }
 
     private async Task RefreshBook(int bookId)
     {
-        _book = await LearningServices.GetBookAsync(bookId);
+        _book = await BookService.GetBookAsync(bookId);
     }
 }

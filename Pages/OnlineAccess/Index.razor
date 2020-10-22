@@ -1,82 +1,81 @@
-﻿    @page "/onlineAccess"
-    @inject NavigationManager NavigationManager;
-    @inject Data.OnlineServices OnlineServices;
-    @inject IJSRuntime JsRuntime;
+﻿@page "/OnlineAccess"
+@inject NavigationManager NavigationManager;
+@inject Data.OnlineAccessService OnlineAccessService;
+@inject IJSRuntime JsRuntime;
 
-    <h3>OnlineAccess</h3>
+<h3>OnlineAccess</h3>
 
-    <small>Need all Access details.</small>
-    <div class="form-group">
-        <a href="/OnlineAccess/Add/" class="btn btn-success"><i class="oi oi-plus"></i> Add OnlineAccess</a>
-    </div>
-    <br>
+<small>Need all Access details.</small>
+<div class="form-group">
+    <a href="/OnlineAccess/Add/" class="btn btn-success"><i class="oi oi-plus"></i> Add OnlineAccess</a>
+</div>
+<br>
 
-    @if (_onlineAccess == null)
+@if (_onlineAccess == null)
+{
+    <p>
+        <em>Loading...</em>
+    </p>
+}
+else if (_onlineAccess.Count == 0)
+{
+    <p>No Records Found.</p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>AccessId</th>
+                <th>CustomerId</th>
+                <th>BookId</th>
+                <th>Author</th>
+                 <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var onlineAccess in _onlineAccess)
+            {
+            <tr>
+                <td>
+                    <a href="/OnlineAccess/View/@onlineAccess.">@onlineAccess.OnlineAccessId</a>
+                </td>
+                <td>@onlineAccess.CustomerId</td>
+                <td>@onlineAccess.BookId</td>
+                  <td>
+                    <button class="btn btn-danger"
+                            @onclick="@(e => RemoveOnlineAccess(@onlineAccess.OnlineAccessId))">
+                        Remove
+                    </button>
+                </td>
+            </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    List<Data.OnlineAccess> _onlineAccess = new List<Data.OnlineAccess>();
+
+    protected override async Task OnInitializedAsync()
     {
-        <p>
-            <em>Loading...</em>
-        </p>
-    }
-    else if (_onlineAccess.Count == 0)
-    {
-        <p>No Records Found.</p>
-    }
-    else
-    {
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>AccessId</th>
-                    <th>CustomerId</th>
-                    <th>BookId</th>
-                    <th>Author</th>
-                     <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var onlineAccess in _onlineAccess)
-                {
-                <tr>
-                    <td>
-                        <a href="/OnlineAccess/View/@onlineAccess.AccessId">@onlineAccess.AccessId</a>
-                    </td>
-                    <td>@onlineAccess.CustomerId</td>
-                    <td>@onlineAccess.BookId</td>
-                      <td>
-                        <button class="btn btn-danger"
-                                @onclick="@(e => RemoveOnlineAccess(@onlineAccess.AccessId))">
-                            Remove
-                        </button>
-                    </td>
-                </tr>
-                }
-            </tbody>
-        </table>
+        await RefreshOnlineAccess();
     }
 
-    @code {
-        List<Data.OnlineAccess> _onlineAccess = new List<Data.OnlineAccess>();
+    private async Task RefreshOnlineAccess()
+    {
+        _onlineAccess = await OnlineAccessService.GetOnlineAccesssesAsync();
+    }
 
-        protected override async Task OnInitializedAsync()
+    private async Task RemoveOnlineAccess(int accessId)
+    {
+        var confirmation = await JsRuntime.InvokeAsync<bool>("confirm", "Please confirm your Access Id");
+
+        if (confirmation)
         {
+            await OnlineAccessService.RemoveOnlineAccessAsync(accessId);
             await RefreshOnlineAccess();
         }
-
-        private async Task RefreshOnlineAccess()
-        {
-            _onlineAccess = await OnlineServices.GetOnlineAccessAsync();
-        }
-
-        private async Task RemoveOnlineAccess(int accessId)
-        {
-            var confirmation = await JsRuntime.InvokeAsync<bool>("confirm", "Please confirm your Access Id");
-
-            if (confirmation)
-            {
-                await OnlineServices.RemoveOnlineAccessAsync(accessId);
-                await RefreshOnlineAccess();
-            }
-        }
-
     }
-*@
+
+}

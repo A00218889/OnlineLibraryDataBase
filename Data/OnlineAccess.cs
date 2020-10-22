@@ -13,22 +13,20 @@ namespace OnlineLibrary.Data
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-
         [Required(ErrorMessage = "OnlineAccess Id is required.")]
-        public string OnlineAccessId { get; set; }
+        public int OnlineAccessId { get; set; }
 
         [Required(ErrorMessage = "Customer Id is required.")]
-        public string CustomerId { get; set; }
+        public int CustomerId { get; set; }
 
         [Required(ErrorMessage = "BookId is required.")]
-        public string BookId { get; set; }
+        public int BookId { get; set; }
 
         [Required(ErrorMessage = "Valid From data is required.")]
-        public string ValidFrom{ get; set; }
+        public DateTime ValidFrom{ get; set; }
 
         [Required(ErrorMessage = "Valid To is required.")]
-        public string ValidTo{ get; set; }
+        public DateTime ValidTo { get; set; }
 
      }
 }
-*/

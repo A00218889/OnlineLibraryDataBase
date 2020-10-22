@@ -1,6 +1,7 @@
 ﻿@page "/books"
+@using OnlineLibrary.Data
 @inject NavigationManager NavigationManager;
-@inject Data.LearningServices LearningServices;
+@inject Data.BookService BookService;
 @inject IJSRuntime JsRuntime;
 
 <h3>Books</h3>
@@ -26,11 +27,11 @@ else
     <table class="table">
         <thead>
             <tr>
-                <th>BookId</th>
-                <th>BookName</th>
-                <th>Pagecount</th>
+                <th>Book Id</th>
+                <th>Name</th>
+                <th>Page Count</th>
                 <th>Author</th>
-                <th>BookGenre</th>
+                <th>Genre</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -67,7 +68,7 @@ else
 
     private async Task RefreshBooks()
     {
-        _book = await LearningServices.GetBooksAsync();
+        _book = await BookService.GetBooksAsync();
     }
 
     private async Task RemoveBook(int bookId)
@@ -76,7 +77,7 @@ else
 
         if (confirmation)
         {
-            await LearningServices.RemoveBookAsync(bookId);
+            await BookService.RemoveBookAsync(bookId);
             await RefreshBooks();
         }
     }

@@ -1,7 +1,6 @@
-﻿@*
-@page "/OnlineAccess/Add/"
+﻿@page "/OnlineAccess/Add/"
 @inject NavigationManager NavigationManager;
-@inject Data.OnlineServices OnlineServices
+@inject Data.OnlineAccessService OnlineAccessService
 
 <h3>Add OnlineAccess</h3>
 
@@ -11,27 +10,32 @@
 
         <dl class="row">
 
-
-
-            <dt class="col-sm-2">
-                Access Id
-            </dt>
-            <dd class="col-sm-10">
-                <InputText id="AccessId" @bind-Value="_onlineAccess.OnlineAccessId" /> <ValidationMessage For="@(() => _onlineAccess.OnlineAccessId)" />
-            </dd>
-
             <dt class="col-sm-2">
                 Customer Id
             </dt>
             <dd class="col-sm-10">
-                <InputText id="CustomerId" @bind-Value="_onlineAccess.CustomerId" /> <ValidationMessage For="@(() => _onlineAccess.CustomerId)" />
+                <InputNumber id="CustomerId" @bind-Value="_onlineAccess.CustomerId" /> <ValidationMessage For="@(() => _onlineAccess.CustomerId)" />
             </dd>
 
             <dt class="col-sm-2">
                 Book Id
             </dt>
             <dd class="col-sm-10">
-                <InputText id="BookId" @bind-Value="_onlineAccess.BookId" /> <ValidationMessage For="@(() => _onlineAccess.BookId)" />
+                <InputNumber id="BookId" @bind-Value="_onlineAccess.BookId" /> <ValidationMessage For="@(() => _onlineAccess.BookId)" />
+            </dd>
+
+            <dt class="col-sm-2">
+                Valid From
+            </dt>
+            <dd class="col-sm-10">
+                <InputDate id="ValidFrom" type="date" @bind-Value="_onlineAccess.ValidFrom" /> <ValidationMessage For="@(() => _onlineAccess.ValidFrom)" />
+            </dd>
+
+            <dt class="col-sm-2">
+                Valid To
+            </dt>
+            <dd class="col-sm-10">
+                <InputDate id="ValidTo" type="date" @bind-Value="_onlineAccess.ValidTo" /> <ValidationMessage For="@(() => _onlineAccess.ValidTo)" />
             </dd>
 
         </dl>
@@ -51,10 +55,9 @@
 
     private async Task HandleValidSubmit()
     {
-        await OnlineServices.AddOnlineAccessAsync(_onlineAccess);
+        await OnlineAccessService.AddOnlineAccessAsync(_onlineAccess);
 
         NavigationManager.NavigateTo("/onlineAccess");
     }
 
 }
- *@

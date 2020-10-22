@@ -12,7 +12,7 @@
                 <em>Loading...</em>
             </p>
         }
-        else if (_book.BookID == 0)
+        else if (_book.BookId == 0)
         {
             <p>No Records Found.</p>
         }
@@ -24,7 +24,7 @@
                     BookId
                 </dt>
                 <dd class="col-sm-10">
-                    @_book.BookID
+                    @_book.BookId
                 </dd>
 
                 <dt class="col-sm-2">
@@ -60,19 +60,19 @@
     </div>
 
     <div>
-        <a href="/Books/Edit/@_book.BookID">Edit</a> | <a href="/Books/">Back to List</a>
+        <a href="/Books/Edit/@_book.BookId">Edit</a> | <a href="/Books/">Back to List</a>
     </div>
 
     @code {
 
         [Parameter]
-        public int BookID { get; set; }
+        public int BookId { get; set; }
 
         Data.Book _book = new Data.Book();
 
         protected override async Task OnInitializedAsync()
         {
-            await RefreshBook(BookID);
+            await RefreshBook(BookId);
         }
 
         private async Task RefreshBook(int bookId)
