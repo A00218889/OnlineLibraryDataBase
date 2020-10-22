@@ -1,5 +1,4 @@
-﻿/*
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +14,12 @@ namespace OnlineLibrary.Data
         {
             _dbContext = dbContext;
         }
-        public async Task<List<Book>>GetBooksAsync()
+        public async Task<List<OnlineAccess>>GetOnlineAccessAsync()
         {
-            return await _dbContext.Book.ToListAsync(); 
-
+            return await _dbContext.OnlineAccess.ToListAsync(); 
+            
         }
-        public async Task<Book>GetBookAsync(int bookId)
+        public async Task<Book>GetOnlineAccessAsync(int bookId)
         {
             return await _dbContext.Book.FirstOrDefaultAsync(book => book.BookID == bookId);
 
@@ -32,7 +31,7 @@ namespace OnlineLibrary.Data
             await _dbContext.SaveChangesAsync();
             return true;
         }
-        public async Task<bool> UpdateBookAsync(Book book)
+        public async Task<bool> UpdateOnlineAccessAsync(Book book)
         {
              _dbContext.Book.Update(book);
             await _dbContext.SaveChangesAsync();
@@ -46,4 +45,3 @@ namespace OnlineLibrary.Data
         }
     }
 }
-*/

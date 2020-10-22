@@ -1,8 +1,6 @@
-﻿@*
-
-    @page "/onlineAccess"
+﻿    @page "/onlineAccess"
     @inject NavigationManager NavigationManager;
-    @inject Data.LearningServices LearningServices;
+    @inject Data.OnlineServices OnlineServices;
     @inject IJSRuntime JsRuntime;
 
     <h3>OnlineAccess</h3>
@@ -40,7 +38,7 @@
                 {
                 <tr>
                     <td>
-                        <a href="/OnlineAccess/View/@OnlineAccess.AccessId">@OnlineAccess.AccessId</a>
+                        <a href="/OnlineAccess/View/@onlineAccess.AccessId">@onlineAccess.AccessId</a>
                     </td>
                     <td>@onlineAccess.CustomerId</td>
                     <td>@onlineAccess.BookId</td>
