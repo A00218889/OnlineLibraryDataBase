@@ -6,17 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Pages\Author\**" />
-    <Compile Remove="Pages\Customer\**" />
-    <Content Remove="Pages\Author\**" />
-    <Content Remove="Pages\Customer\**" />
-    <EmbeddedResource Remove="Pages\Author\**" />
-    <EmbeddedResource Remove="Pages\Customer\**" />
-    <None Remove="Pages\Author\**" />
-    <None Remove="Pages\Customer\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Remove="Pages\FetchData.razor" />
   </ItemGroup>
 
@@ -33,6 +22,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Pages\Author\Add.razor" />
+    <None Include="Pages\Author\Edit.razor" />
+    <None Include="Pages\Author\Index.razor" />
+    <None Include="Pages\Author\View.razor" />
+    <None Include="Pages\Customer\Add.razor" />
+    <None Include="Pages\Customer\Edit.razor" />
+    <None Include="Pages\Customer\Index.razor" />
+    <None Include="Pages\Customer\View.razor" />
     <None Include="Pages\OnlineAccess\Add.razor" />
     <None Include="Pages\OnlineAccess\Edit.razor" />
     <None Include="Pages\OnlineAccess\Index.razor" />

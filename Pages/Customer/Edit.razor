@@ -1,54 +1,54 @@
-﻿@*
-@page "/Books/Edit/{BookId:int}"
+﻿@page "/Books/Edit/{BookId:int}"
 @inject NavigationManager NavigationManager;
-@inject Data.LearningServices LearningServices
+@inject Data.CustomerService CustomerService
 
-<h3>Edit Book</h3>
+<h3>Edit Customer</h3>
 
 <div>
     <hr />
-    @if (_book == null)
+    @if (_customer == null)
     {
         <p>
             <em>Loading...</em>
         </p>
     }
-    else if (_book.BookId == 0)
+    else if (_customer.CustomerId == 0)
     {
         <p>No Records Found.</p>
     }
     else
     {
-        <EditForm Model="@_book" OnValidSubmit="@HandleValidSubmit">
+        <EditForm Model="@_customer" OnValidSubmit="@HandleValidSubmit">
 
             <dl class="row">
 
                 <dt class="col-sm-2">
-                    Book ID
+                    Customer ID
                 </dt>
                 <dd class="col-sm-10">
-                    @_book.BookId
+                    @_customer.CustomerId
                 </dd>
 
                 <dt class="col-sm-2">
-                    Book Name
+                    First Name
                 </dt>
                 <dd class="col-sm-10">
-                    <InputText id="BookName" @bind-Value="_book.BookName" /> <ValidationMessage For="@(() => _book.BookName)" />
+                    <InputText id="FirstName" @bind-Value="_customer.FirstName" /> <ValidationMessage For="@(() => _customer.FirstName)" />
                 </dd>
 
                 <dt class="col-sm-2">
-                    Author
+                    Last Name
                 </dt>
                 <dd class="col-sm-10">
-                    <InputText id="Author" @bind-Value="_book.Author" /> <ValidationMessage For="@(() => _book.Author)" />
+                    <InputText id="LastName" @bind-Value="_customer.LastName" /> <ValidationMessage For="@(() => _customer.LastName)" />
                 </dd>
 
+                
                 <dt class="col-sm-2">
-                    BookGenre
+                   AccessId
                 </dt>
                 <dd class="col-sm-10">
-                    <InputText id="BookGenre" @bind-Value="_book.BookGenre" /> <ValidationMessage For="@(() => _book.BookGenre)" />
+                    <InputNumber id="AccessId" @bind-Value="_customer.AccessId" /> <ValidationMessage For="@(() => _customer.AccessId)" />
                 </dd>
 
             </dl>
@@ -61,32 +61,31 @@
 </div>
 
 <div>
-    <a href="/Books/View/@_book.BookId">View</a> |
+    <a href="/Books/View/@_customer.CustomerId">View</a> |
     <a href="/Books/">Back to List</a>
 </div>
 
 @code {
 
     [Parameter]
-    public int BookId { get; set; }
+    public int CustomerId { get; set; }
 
-    private Data.Book _book = new Data.Book();
+    private Data.Customer _customer = new Data.Customer();
 
     protected override async Task OnInitializedAsync()
     {
-        await RefreshBook(BookId);
+        await RefreshCustomer(CustomerId);
     }
 
-    private async Task RefreshBook(int bookId)
+    private async Task RefreshCustomer(int customerId)
     {
-        _book = await LearningServices.GetBookAsync(bookId);
+        _customer = await CustomerService.GetCustomerAsync(CustomerId);
     }
 
     private async Task HandleValidSubmit()
     {
-        await LearningServices.UpdateBookAsync(_book);
-        NavigationManager.NavigateTo($"/Books/View/{BookId}");
+        await CustomerService.UpdateCustomerAsync(_customer);
+        NavigationManager.NavigateTo($"/Customers/View/{CustomerId}");
     }
 
 }
-    *@

@@ -1593,23 +1593,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\nathan\\.nuget\\packages\\": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Users\\nanda\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\nathan\\source\\repos\\202009_STY1001\\OnlineLibraryDataBase\\OnlineLibrary.csproj",
+      "projectUniqueName": "C:\\Users\\nanda\\source\\repos\\OnlineLibraryDataBase\\OnlineLibrary.csproj",
       "projectName": "OnlineLibrary",
-      "projectPath": "C:\\Users\\nathan\\source\\repos\\202009_STY1001\\OnlineLibraryDataBase\\OnlineLibrary.csproj",
-      "packagesPath": "C:\\Users\\nathan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\nathan\\source\\repos\\202009_STY1001\\OnlineLibraryDataBase\\obj\\",
+      "projectPath": "C:\\Users\\nanda\\source\\repos\\OnlineLibraryDataBase\\OnlineLibrary.csproj",
+      "packagesPath": "C:\\Users\\nanda\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\nanda\\source\\repos\\OnlineLibraryDataBase\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-      ],
       "configFilePaths": [
-        "C:\\Users\\nathan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\nanda\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [

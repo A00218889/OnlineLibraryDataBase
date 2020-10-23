@@ -1,83 +1,75 @@
-﻿@*
-    @page "/Students/View/{StudentId:int}"
-    @inject Data.LearningServices LearningServices
+﻿@page "/Customers/View/{CustomerId:int}"
+@inject Data.CustomerService CustomerService
 
-    <h3>View Book</h3>
+<h3>View Customer</h3>
 
-    <div>
-        <hr />
-        @if (_book == null)
-        {
-            <p>
-                <em>Loading...</em>
-            </p>
-        }
-        else if (_book.BookId == 0)
-        {
-            <p>No Records Found.</p>
-        }
-        else
-        {
-            <dl class="row">
-
-                <dt class="col-sm-2">
-                    BookId
-                </dt>
-                <dd class="col-sm-10">
-                    @_book.BookId
-                </dd>
-
-                <dt class="col-sm-2">
-                    Book Name
-                </dt>
-                <dd class="col-sm-10">
-                    @_book.BookName
-                </dd>
-
-                <dt class="col-sm-2">
-                    Page Count
-                </dt>
-                <dd class="col-sm-10">
-                    @_book.Pagecount
-                </dd>
-
-                <dt class="col-sm-2">
-                    Author
-                </dt>
-                <dd class="col-sm-10">
-                    @_book.Author
-                </dd>
-
-                <dt class="col-sm-2">
-                    Book Genre
-                </dt>
-                <dd class="col-sm-10">
-                    @_book.BookGenre
-                </dd>
-
-            </dl>
-        }
-    </div>
-
-    <div>
-        <a href="/Books/Edit/@_book.BookId">Edit</a> | <a href="/Books/">Back to List</a>
-    </div>
-
-    @code {
-
-        [Parameter]
-        public int BookId { get; set; }
-
-        Data.Book _book = new Data.Book();
-
-        protected override async Task OnInitializedAsync()
-        {
-            await RefreshBook(BookId);
-        }
-
-        private async Task RefreshBook(int bookId)
-        {
-            _book = await LearningServices.GetBookAsync(bookId);
-        }
+<div>
+    <hr />
+    @if (_customer == null)
+    {
+        <p>
+            <em>Loading...</em>
+        </p>
     }
-*@
+    else if (_customer.CustomerId == 0)
+    {
+        <p>No Records Found.</p>
+    }
+    else
+    {
+        <dl class="row">
+
+            <dt class="col-sm-2">
+                Customer Id
+            </dt>
+            <dd class="col-sm-10">
+                @_customer.CustomerId
+            </dd>
+
+            <dt class="col-sm-2">
+                First Name
+            </dt>
+            <dd class="col-sm-10">
+                @_customer.FirstName
+            </dd>
+
+            <dt class="col-sm-2">
+                Last Name
+            </dt>
+            <dd class="col-sm-10">
+                @_customer.LastName
+            </dd>
+
+            <dt class="col-sm-2">
+                Access Id
+            </dt>
+            <dd class="col-sm-10">
+                @_customer.AccessId
+            </dd>
+
+             
+        </dl>
+    }
+</div>
+
+<div>
+    <a href="/Customers/Edit/@_customer.CustomerId">Edit</a> | <a href="/Customers/">Back to List</a>
+</div>
+
+@code {
+
+    [Parameter]
+    public int CustomerId { get; set; }
+
+    Data.Customer _customer = new Data.Customer();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await RefreshCustomer(CustomerId);
+    }
+
+    private async Task RefreshCustomer(int CustomerId)
+    {
+        _customer = await CustomerService.GetCustomerAsync(CustomerId);
+    }
+}
